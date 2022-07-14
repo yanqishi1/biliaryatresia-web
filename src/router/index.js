@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Scan from "@/views/patient/Scan";
+import Account from "@/views/Account";
+import Guilde from "@/views/patient/Guilde";
+import Profile from "@/views/patient/Profile";
+import Reserve from "@/views/patient/Reserve";
+import NotFound from "@/views/NotFound";
+import Fee from "@/views/patient/Fee";
 
 Vue.use(VueRouter)
 
@@ -17,15 +24,56 @@ Vue.use(VueRouter)
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/About.vue')
+      return import(/* webpackChunkName: "about" */ '../views/patient/About.vue')
     }
-  }
+  },
+    {
+      path:'/scan',
+      name:'Scan',
+      component:Scan
+    },
+    {
+      path:'/account',
+      name:'Account',
+      component:Account,
+    },
+    {
+      path:'/guilde',
+      name:'Guilde',
+      component:Guilde
+    }
+    ,{
+      path:'/reserve',
+      name:'Reserve',
+      component:Reserve
+    },
+    {
+      path:'/fee',
+      name:"Fee",
+      component: Fee
+    },
+    {
+      path:'/profile',
+      name:'Profile',
+      component:Profile
+    },
+    {
+      path:'/404',
+      name:'NotFound',
+      component: NotFound
+    },
+    {
+      path:'*',
+      redirect:{
+        name:"NotFound"
+      }
+    }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
