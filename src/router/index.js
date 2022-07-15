@@ -8,6 +8,8 @@ import Profile from "@/views/patient/Profile";
 import Reserve from "@/views/patient/Reserve";
 import NotFound from "@/views/NotFound";
 import Fee from "@/views/patient/Fee";
+import EditProfile from "@/views/patient/EditProfile";
+import PChat from "@/views/patient/PChat";
 
 Vue.use(VueRouter)
 
@@ -56,6 +58,16 @@ Vue.use(VueRouter)
       path:'/profile',
       name:'Profile',
       component:Profile
+    },
+    {
+      path:'/editp',
+      name:'EditProfile',
+      component: EditProfile
+    },
+    {
+      path:'/chat',
+      name:'PChat',
+      component: PChat,
     },
     {
       path:'/404',

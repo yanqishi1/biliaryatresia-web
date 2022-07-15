@@ -4,23 +4,54 @@
           <router-link to="/" slot="left">
             <mt-button icon="back">返回</mt-button>
           </router-link>
+          <mt-button icon="more" slot="right" @click="editProfile"></mt-button>
         </mt-header>
-        <h2>拍摄记录</h2>
-        <div class="detect">
+        <div class="patient-info">
+          <mt-cell title="孩子姓名">
+            <span style="color: gray">{{patient.name}}</span>
+          </mt-cell>
+          <mt-cell title="手机号">
+            <span style="color: gray">{{patient.tel}}</span>
+          </mt-cell>
+          <mt-cell title="生日">
+            <span style="color: gray">{{patient.birthday}}</span>
+          </mt-cell>
+          <mt-cell title="体重">
+            <span style="color: gray">{{patient.weight}}</span>
+          </mt-cell>
+          <mt-cell title="性别">
+            <span style="color: gray">{{patient.sex}}</span>
+          </mt-cell>
+          <mt-cell title="喂养方式">
+            <span style="color: gray">{{patient.eat}}</span>
+          </mt-cell>
+        </div>
+        <div class="history">
+          <mt-cell title="拍摄记录">
+            <img slot="icon" src="../../assets/img/icon/shit.png" width="24" height="24">
+            <span style="color: green" @click="detectHistoryShow()">详情</span>
+          </mt-cell>
+          <div v-show="detectHistory">
             <div>
               <mt-cell v-for="(ds, index) in detects" :title="ds.date">
                 <span>{{ds.result}}</span>
                 <img slot="icon" src="../../assets/img/icon/1.png" width="24" height="24">
               </mt-cell>
             </div>
+          </div>
         </div>
-        <el-divider></el-divider>
-        <h2>就诊记录</h2>
-        <div class="detect">
-          <div>
-            <mt-cell v-for="(rv, index) in reserves" :title="rv.date">
-              <span @click="poprv(rv.result)">{{rv.doctor}}</span>
-            </mt-cell>
+        <div class="history">
+          <mt-cell title="就诊记录">
+            <img slot="icon" src="../../assets/img/icon/record.png" width="24" height="24">
+            <span style="color: green" @click="reserveHistoryShow()">详情</span>
+          </mt-cell>
+          <div v-show="reserveHistory" class="history">
+            <div>
+              <mt-cell v-for="(rv, index) in reserves" :title="rv.date">
+                <span @click="poprv(rv.result)">{{rv.doctor}}</span>
+                <span @click="openchat()" style="color: green">&emsp;咨询</span>
+              </mt-cell>
+            </div>
           </div>
         </div>
     </div>
@@ -32,6 +63,16 @@
         name: "profile",
         data(){
           return{
+            patient:{
+              name:'baba',
+              tel:'13565803934',
+              birthday:'2022-9-12',
+              weight:'',
+              sex:'',
+              eat:'',
+            },
+            detectHistory:false,
+            reserveHistory:false,
             detects:[
               {
                 result:'正常',
@@ -66,13 +107,29 @@
         methods:{
           poprv(msg){
             MessageBox.alert(msg, '医嘱');
+          },
+          editProfile(){
+            this.$router.push('/editp');
+          },
+          detectHistoryShow(){
+            this.detectHistory = ~this.detectHistory;
+          },
+          reserveHistoryShow(){
+            this.reserveHistory = ~this.reserveHistory;
+          },
+          openchat(){
+            this.$router.push("/chat");
           }
         }
     }
 </script>
 
 <style scoped>
-    .detect{
+    .patient-info{
+      text-align: left;
+      padding:0 3%;
+    }
+    .history{
       text-align: left;
       padding:0 3%;
     }
