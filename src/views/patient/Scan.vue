@@ -1,6 +1,6 @@
 <template>
     <div>
-      <mt-header title="个人信息">
+      <mt-header title="便便检测器">
         <router-link to="/" slot="left">
           <mt-button icon="back">返回</mt-button>
         </router-link>
@@ -15,7 +15,7 @@
           </div>
           <img id="preview" src="#">
           <input id="image" name="file" type="file" accept="image/*" @change="changepic()" multiple hidden/>
-          <button class="button" type="button" id="submit">识别</button>
+          <button class="button" type="button" @click="submit">识别</button>
           <button class="button" type="reset" id="reset">重置</button>
         </form>
       </section>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    import { MessageBox } from 'mint-ui';
     import $ from 'jquery'
     export default {
         name: "scan",
@@ -41,22 +42,6 @@
           $("#reset").click(function () {
             $(".upload").css("display", "flex");
             $("#preview").css("display", "none");
-          })
-
-
-          $("#submit").click(function () {
-            if(this.formdata!=undefined){
-              $.ajax({
-                url:'/home/upload/',
-                processData:false,
-                contentType:false,
-                data:this.formdata,
-                type:"post",
-                success:function (data) {
-                  document.write(data)
-                }
-              });
-            }
           })
         },
         methods:{
@@ -286,6 +271,17 @@
               }
               return new Blob([u8arr], {type:mime});
             }
+          ,submit(){
+            if(this.formdata!==undefined){
+                this.$axios
+                    .post('/api/detect/upload',this.formdata)
+                    .then(data=>{
+                        MessageBox.alert("识别结果:"+data.data.msg);
+                    });
+            }else{
+              MessageBox.alert("上传失败");
+            }
+          }
         }
     }
 </script>
