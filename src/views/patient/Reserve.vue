@@ -6,7 +6,7 @@
       </router-link>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
-    <form id="reserve-form">
+    <div id="reserve-form">
       <mt-field label="孩子姓名" placeholder="请输入孩子姓名" v-model="username"></mt-field>
       <mt-cell title="生日">
         <div class="data-input" @click="openBirthdayPicker">{{birthday || '请输入孩子生日'}}</div>
@@ -52,12 +52,14 @@
       <div style="text-align: center">
         <mt-button type="primary" size="large" @click="submit">预约</mt-button>
       </div>
-    </form>
+    </div>
   </div>
 
 </template>
 
 <script>
+    import {MessageBox} from "mint-ui";
+
     export default {
         name: "reserve",
         created() {
@@ -77,20 +79,22 @@
             endDate:undefined,
             before_select:-1,
             doctors:[
-              {
-                name:'李医生(副主任医师)',
-                reserve_num:20,
-                icon:'1.png',
-                fee:12,
-                select:false,
-              },
-              {
-                name:'王医生(主任医师)',
-                reserve_num:10,
-                icon:'2.png',
-                fee:25,
-                select:false,
-              }
+              // {
+              //   id:1,
+              //   name:'李医生(副主任医师)',
+              //   reserve_num:20,
+              //   icon:'1.png',
+              //   fee:12,
+              //   select:false,
+              // },
+              // {
+              //   id:2,
+              //   name:'王医生(主任医师)',
+              //   reserve_num:10,
+              //   icon:'2.png',
+              //   fee:25,
+              //   select:false,
+              // }
             ],
           }
         },
@@ -103,6 +107,7 @@
           },
           handleConfirm(data) {
             this.date = this.formatDate(data);
+            this.getDoctors();
           },
           handleBirthday(data) {
             this.birthday = this.formatDate(data);
@@ -117,13 +122,47 @@
             return year + "-" + this.formatTen(month) + "-" + this.formatTen(day);
           },
           submit(){
-            this.$router.push("/fee")
+            let formdata = new FormData();
+            formdata.append("name", this.username);
+            formdata.append("birthday", this.birthday);
+            formdata.append("sex", this.sex);
+            formdata.append("date", this.date);
+            formdata.append("doctorId", this.doctors[this.before_select].id);
+            this.$axios
+                .post('/api/patient/reserve', formdata)
+                .then(data=>{
+                    if(data.data.code==200) {
+                      MessageBox.alert("预约成功,请缴费");
+                      this.$router.push("/fee");
+                    }
+                });
           },
           selectDoctor(index){
             if(this.before_select>-1){
               this.doctors[this.before_select].select = false;
             }
             this.before_select = index;
+          },
+          getDoctors(){
+            this.doctors = [];
+            var self = this
+            let formdata = new FormData();
+            formdata.append("date", this.date);
+            this.$axios
+                .post('/api/patient/getdoctors', formdata)
+                .then(data=>{
+                  let info = data.data;
+                  for (let i = 0; i < info.length; i++) {
+                      self.doctors.push({
+                        id:info[i].docId,
+                        name:info[i].doctor_name+'('+info[i].title+')',
+                        reserve_num:info[i].num,
+                        icon:'2.png',
+                        fee:info[i].fee,
+                        select:false,
+                      })
+                  }
+                });
           }
         }
     }

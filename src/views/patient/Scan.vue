@@ -274,9 +274,9 @@
           ,submit(){
             if(this.formdata!==undefined){
                 this.$axios
-                    .post('/api/detect/upload',this.formdata)
+                    .post('/api/patient/detect',this.formdata)
                     .then(data=>{
-                        MessageBox.alert("识别结果:"+data.data.msg);
+                      MessageBox.alert("识别结果:"+data.data.msg);
                     });
             }else{
               MessageBox.alert("上传失败");
