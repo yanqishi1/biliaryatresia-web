@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    patient:undefined,
+    detects:undefined,
+    reserves:undefined,
+    history_router:'',
   },
   mutations: {
   },

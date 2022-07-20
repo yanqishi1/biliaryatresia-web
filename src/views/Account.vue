@@ -89,8 +89,14 @@ export default {
           .post('/api/account/login_code', formdata)
           .then(resp => {
             if (resp.data.code === 200) {
-              MessageBox.alert("登录成功")
-              _this.$router.push("/")
+              MessageBox.alert("登录成功!")
+              if(this.$store.state.history_router!==""){
+                let router = this.$store.state.history_router;
+                this.$store.state.history_router = "";
+                _this.$router.push(router);
+              }else{
+                _this.$router.push("/")
+              }
             } else {
               MessageBox.alert(resp.data.msg);
             }
@@ -106,8 +112,15 @@ export default {
           .post('/api/account/login', formdata)
           .then(resp => {
             if (resp.data.code === 200) {
-              MessageBox.alert("登录成功")
-              _this.$router.push("/")
+              MessageBox.alert("登录成功!")
+              this.$store.state.patient = resp.data.object;
+              if(this.$store.state.history_router!==""){
+                let router = this.$store.state.history_router;
+                this.$store.state.history_router = "";
+                 _this.$router.push(router);
+              }else{
+                _this.$router.push("/")
+              }
             } else {
               MessageBox.alert(resp.data.msg);
             }

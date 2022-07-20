@@ -87,14 +87,6 @@
               //   fee:12,
               //   select:false,
               // },
-              // {
-              //   id:2,
-              //   name:'王医生(主任医师)',
-              //   reserve_num:10,
-              //   icon:'2.png',
-              //   fee:25,
-              //   select:false,
-              // }
             ],
           }
         },

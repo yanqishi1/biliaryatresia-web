@@ -32,6 +32,14 @@
               formdata:undefined
             }
         },
+        created() {
+          if(this.$store.state.patient===undefined){
+            MessageBox.alert("请先登录").then(action=>{
+              this.$store.state.history_router = "/scan"
+              this.$router.push("/account")
+            })
+          }
+        },
         mounted() {
           /**
            * 这是基于html5的前端图片工具，压缩工具。
