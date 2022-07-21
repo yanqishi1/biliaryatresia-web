@@ -61,6 +61,14 @@
     import { MessageBox } from 'mint-ui';
     export default {
         name: "profile",
+        created() {
+          if(this.$store.state.patient===undefined){
+            MessageBox.alert("请先登录").then(action=>{
+              this.$store.state.history_router = "/profile"
+              this.$router.push("/account")
+            })
+          }
+        },
         mounted() {
           if(this.$store.state.reserves===undefined || this.$store.state.detects==undefined){
             this.getRecored();

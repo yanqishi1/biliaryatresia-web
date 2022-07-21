@@ -63,6 +63,12 @@
     export default {
         name: "reserve",
         created() {
+          if(this.$store.state.patient===undefined){
+            MessageBox.alert("请先登录").then(action=>{
+              this.$store.state.history_router = "/reserve"
+              this.$router.push("/account")
+            })
+          }
           let now = new Date();
           now.setDate(now.getDate()+7);
           this.endDate = new Date(now);
