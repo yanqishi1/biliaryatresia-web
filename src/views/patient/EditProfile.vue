@@ -6,7 +6,7 @@
       </router-link>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
-    <form id="edit-form">
+    <div id="edit-form">
       <mt-field label="孩子姓名" placeholder="请输入孩子姓名" v-model="username"></mt-field>
       <mt-cell title="生日">
         <div class="data-input" @click="openBirthdayPicker">{{birthday || '请输入孩子生日'}}</div>
@@ -24,7 +24,7 @@
       <mt-radio
           align="left"
           title="性别"
-          v-model="sex"
+          v-model="pgender"
           :options="['男', '女']">
       </mt-radio>
       <mt-field label="体重" placeholder="请输入孩子体重" v-model="weight"></mt-field>
@@ -37,19 +37,40 @@
       <div style="text-align: center">
         <mt-button type="primary" size="large" @click="submit">保存</mt-button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import {MessageBox} from "mint-ui";
+
 export default {
   name: "EditProfile",
+  created() {
+    if(this.$store.state.patient!==undefined){
+      if(this.$store.state.patient.pname!=null){
+        this.username = this.$store.state.patient.pname;
+      }
+      if(this.$store.state.patient.pbirthday!=null){
+        this.birthday = this.$store.state.patient.pbirthday;
+      }
+      if(this.$store.state.patient.pgender!=null){
+        this.pgender = this.$store.state.patient.pgender;
+      }
+      if(this.$store.state.patient.pweight!=null){
+        this.weight = this.$store.state.patient.pweight;
+      }
+      if(this.$store.state.patient.peat!=null){
+        this.eat = this.$store.state.patient.peat;
+      }
+    }
+  },
   data(){
     return{
       username:'',
       birthday:'',
       birthdayPicker:'',
-      sex:'',
+      pgender:'',
       weight:'',
       eat:''
     }
@@ -77,7 +98,28 @@ export default {
       return year + "-" + this.formatTen(month) + "-" + this.formatTen(day);
     },
     submit(){
-      this.$router.push("/fee")
+      var _this = this
+      var formdata = new FormData();
+      formdata.append("pId", this.$store.state.patient.pid);
+      formdata.append("pName", this.username);
+      formdata.append("pBirthday", this.birthday);
+      formdata.append("pGender", this.pgender);
+      formdata.append("pWeight", this.weight);
+      formdata.append("pEat", this.eat);
+      this.$axios
+          .post('/api/patient/saveprofile', formdata)
+          .then(resp => {
+            if (resp.data.code === 200) {
+              MessageBox.alert("修改成功").then(action=>{
+                this.$router.push("/profile")
+              })
+
+              _this.$store.state.patient = resp.data.object;
+            } else {
+              MessageBox.alert("服务器错误");
+            }
+          })
+          .catch(failResponse => {})
     },
     selectDoctor(index){
       if(this.before_select>-1){

@@ -20,7 +20,7 @@
             <span style="color: gray">{{this.$store.state.patient.pweight}}</span>
           </mt-cell>
           <mt-cell title="性别">
-            <span style="color: gray">{{this.$store.state.patient.psex}}</span>
+            <span style="color: gray">{{this.$store.state.patient.pgender}}</span>
           </mt-cell>
           <mt-cell title="喂养方式">
             <span style="color: gray">{{this.$store.state.patient.peat}}</span>
@@ -70,7 +70,9 @@
           }
         },
         mounted() {
-          if(this.$store.state.reserves===undefined || this.$store.state.detects==undefined){
+          if(this.$store.state.patient!==undefined &&
+              this.$store.state.reserves===undefined ||
+              this.$store.state.detects==undefined){
             this.getRecored();
           }else{
             this.detects = this.$store.state.detects;

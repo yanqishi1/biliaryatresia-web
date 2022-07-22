@@ -113,7 +113,7 @@ export default {
           .then(resp => {
             if (resp.data.code === 200) {
               MessageBox.alert("登录成功!")
-              this.$store.state.patient = resp.data.object;
+              _this.$store.state.patient = resp.data.object;
               if(this.$store.state.history_router!==""){
                 let router = this.$store.state.history_router;
                 this.$store.state.history_router = "";

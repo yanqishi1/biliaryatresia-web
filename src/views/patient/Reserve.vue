@@ -72,6 +72,15 @@
           let now = new Date();
           now.setDate(now.getDate()+7);
           this.endDate = new Date(now);
+          if(this.$store.state.patient.pname!=null){
+            this.username = this.$store.state.patient.pname;
+          }
+          if(this.$store.state.patient.pbirthday!=null){
+            this.birthday = this.$store.state.patient.pbirthday;
+          }
+          if(this.$store.state.patient.pgender!=null){
+            this.sex = this.$store.state.patient.pgender;
+          }
         },
        data(){
           return{
