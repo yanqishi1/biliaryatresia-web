@@ -33,6 +33,7 @@
 <style scoped>
   .home{
     height: 100%;
+    text-align: center;
   }
 
   .main{

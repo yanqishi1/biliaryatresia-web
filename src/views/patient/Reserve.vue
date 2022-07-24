@@ -42,7 +42,7 @@
           v-model="pickerValue">
       </mt-datetime-picker>
       <div>
-        <mt-cell v-for="(doc, index) in doctors" :title="doc.name">
+        <mt-cell v-for="(doc, index) in doctors" :title="doc.name" :key="index">
           <img slot="icon" src="../../assets/img/doctor/1.png" width="24" height="24">
           <span style="color: green">剩余人数{{doc.reserve_num}}</span>
           <span style="color: green">&emsp;费用{{doc.fee}}&emsp;</span>

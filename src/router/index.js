@@ -10,6 +10,8 @@ import NotFound from "@/views/NotFound";
 import Fee from "@/views/patient/Fee";
 import EditProfile from "@/views/patient/EditProfile";
 import PChat from "@/views/patient/PChat";
+import Doctor from "@/views/doctor/Doctor";
+import Prescription from "@/views/doctor/Prescription";
 
 Vue.use(VueRouter)
 
@@ -68,6 +70,16 @@ Vue.use(VueRouter)
       path:'/chat',
       name:'PChat',
       component: PChat,
+    },
+    {
+      path:'/doctor',
+      name:'Doctor',
+      component: Doctor,
+    },
+    {
+      path:'/order',
+      name:'Prescription',
+      component: Prescription
     },
     {
       path:'/404',

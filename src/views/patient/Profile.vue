@@ -33,7 +33,7 @@
           </mt-cell>
           <div v-show="detectHistory">
             <div>
-              <mt-cell v-for="(ds, index) in detects" :title="ds.imgDate">
+              <mt-cell v-for="(ds, index) in detects" :title="ds.imgDate" :key="index">
                 <span>{{ds.detectResult}}</span>
                 <img slot="icon" src="../../assets/img/icon/1.png" width="24" height="24">
               </mt-cell>
@@ -47,7 +47,7 @@
           </mt-cell>
           <div v-show="reserveHistory" class="history">
             <div>
-              <mt-cell v-for="(rv, index) in reserves" :title="rv.date">
+              <mt-cell v-for="(rv, index) in reserves" :title="rv.date" :key="index">
                 <span @click="poprv(rv.result)">{{rv.doctor}}</span>
                 <span @click="openchat()" style="color: green">&emsp;咨询</span>
               </mt-cell>

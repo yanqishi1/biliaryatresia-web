@@ -9,6 +9,12 @@ export default new Vuex.Store({
     detects:undefined,
     reserves:undefined,
     history_router:'',
+    doctor:{
+      name:'王医生',
+      tel:'135646454',
+      photo:'',
+      dept:'儿科'
+    },
   },
   mutations: {
   },
