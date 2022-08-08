@@ -24,16 +24,16 @@ export default {
   props:["pickerTitle","add"],
   created() {
     if(this.add===undefined || this.add===""){
-      this.add = 7
+      this.limit = 7
     }else{
-      this.add = parseInt(this.add)
+      this.limit = parseInt(this.add)
     }
   },
   mounted() {
 
     let now = new Date();
     this.selectDate = this.formatDate(now);
-    now.setDate(now.getDate()+this.add);
+    now.setDate(now.getDate()+this.limit);
     this.endDate = new Date(now);
   },
   data() {
@@ -42,6 +42,7 @@ export default {
       startDate: new Date(), //起始时间,
       endDate: undefined,
       pickerValue: '',
+      limit:7,
     }
   },
   methods:{
