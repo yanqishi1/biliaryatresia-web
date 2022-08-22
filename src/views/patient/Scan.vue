@@ -1,25 +1,17 @@
 <template>
-    <div>
-      <mt-header title="便便检测器">
-        <router-link to="/" slot="left">
-          <mt-button icon="back">返回</mt-button>
-        </router-link>
-      </mt-header>
-      <section class="main">
-
-        <h1 class="main-title">便便检测器</h1>
-        <p class="main-desc">请让便便在拍摄的图片中央，并保持光线明亮</p>
-        <form class="upload-form" id="uform">
-          <div class="upload">
-            +
-          </div>
-          <img id="preview" src="#">
-          <input id="image" name="file" type="file" accept="image/*" @change="changepic()" multiple hidden/>
-          <button class="button" type="button" @click="submit">识别</button>
-          <button class="button" type="reset" id="reset">重置</button>
-        </form>
-      </section>
-    </div>
+    <section class="main">
+      <h1 class="main-title">便便检测器</h1>
+      <p class="main-desc">请让便便在拍摄的图片中央，并保持光线明亮</p>
+      <form class="upload-form" id="uform">
+        <div class="upload">
+          +
+        </div>
+        <img id="preview" src="#">
+        <input id="image" name="file" type="file" accept="image/*" @change="changepic()" multiple hidden/>
+        <button class="button" type="button" @click="submit">识别</button>
+        <button class="button" type="reset" id="reset">重置</button>
+      </form>
+    </section>
 </template>
 
 <script>
@@ -67,7 +59,6 @@
 
             var oFile = $('#image')[0].files[0];
             var imgSize = oFile.size;
-            console.log(imgSize)
             if(imgSize > 600*600*3){
               // 图片压缩处理
               var reader   = new FileReader();

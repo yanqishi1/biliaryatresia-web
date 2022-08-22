@@ -1,11 +1,4 @@
 <template>
-  <div>
-    <mt-header title="新生儿胆道闭锁">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
     <div id="reserve-form">
       <mt-field label="孩子姓名" placeholder="请输入孩子姓名" v-model="username"></mt-field>
       <mt-cell title="生日">
@@ -53,8 +46,6 @@
         <mt-button type="primary" size="large" @click="submit">预约</mt-button>
       </div>
     </div>
-  </div>
-
 </template>
 
 <script>

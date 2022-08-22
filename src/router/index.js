@@ -12,14 +12,15 @@ import EditProfile from "@/views/patient/EditProfile";
 import PChat from "@/views/patient/PChat";
 import Doctor from "@/views/doctor/Doctor";
 import Prescription from "@/views/doctor/Prescription";
+import Patient from "../views/patient/Patient";
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Patient',
+    component: Patient
   },
   {
     path: '/about',

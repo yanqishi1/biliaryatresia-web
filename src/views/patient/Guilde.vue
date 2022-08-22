@@ -1,10 +1,5 @@
 <template>
     <div>
-        <mt-header fixed title="新生儿胆道闭锁">
-          <router-link to="/" slot="left">
-            <mt-button icon="back">返回</mt-button>
-          </router-link>
-        </mt-header>
         <section class="main">
           <div>
             <h3>胆道闭锁常见问题</h3>

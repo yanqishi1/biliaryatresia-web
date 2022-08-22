@@ -1,9 +1,6 @@
 <template>
     <div class="profile">
         <mt-header title="个人信息">
-          <router-link to="/" slot="left">
-            <mt-button icon="back">返回</mt-button>
-          </router-link>
           <mt-button icon="more" slot="right" @click="editProfile"></mt-button>
         </mt-header>
         <div class="patient-info">
