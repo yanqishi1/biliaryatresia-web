@@ -12,6 +12,12 @@ import EditProfile from "@/views/patient/EditProfile";
 import PChat from "@/views/patient/PChat";
 import Doctor from "@/views/doctor/Doctor";
 import Prescription from "@/views/doctor/Prescription";
+import Admin from "@/views/admin/admin";
+import PatientAdmin from "@/views/admin/PatientAdmin";
+import DocAdmin from "@/views/admin/DocAdmin";
+import DetectAdmin from "@/views/admin/DetectAdmin";
+import OrderAdmin from "@/views/admin/OrderAdmin";
+import LogAdmin from "@/views/admin/LogAdmin";
 
 Vue.use(VueRouter)
 
@@ -80,6 +86,38 @@ Vue.use(VueRouter)
       path:'/order',
       name:'Prescription',
       component: Prescription
+    },
+    {
+      path:'/admin',
+      name:'Admin',
+      component: Admin,
+      children:[
+        {
+          path:'patient',
+          name:'PatientAdmin',
+          component: PatientAdmin,
+        },
+        {
+          path:'doc',
+          name:'DocAdmin',
+          component: DocAdmin,
+        },
+        {
+          path:'detect',
+          name:'DetectAdmin',
+          component: DetectAdmin,
+        },
+        {
+          path:'order',
+          name:'OrderAdmin',
+          component: OrderAdmin,
+        },
+        {
+          path:'log',
+          name:'LogAdmin',
+          component: LogAdmin,
+        },
+      ]
     },
     {
       path:'/404',

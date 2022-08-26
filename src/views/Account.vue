@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="account">
       <BAHeader></BAHeader>
       <mt-navbar v-model="selected">
         <mt-tab-item id="1">登录</mt-tab-item>
@@ -132,5 +132,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .account{
+    text-align: center;
+  }
 </style>
